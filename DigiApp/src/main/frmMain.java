@@ -34,11 +34,15 @@ public class frmMain extends javax.swing.JFrame {
     /**
      * Creates new form frmMain
      */
+
     public frmMain() {
         initComponents();
         tblDigimon.setModel(model); // diseña la tabla en base a las columnas definidas
         btnBatalla.setEnabled(false); // no se puede batallar si no hay digimons peleadores
-        reloj.start(); // objeto iniciado para la hora del sistema. ¡No modificar!
+        reloj.start(); // objeto iniciado para la hora del sistema. ¡No modificar!}
+       
+
+             
     }
     
     // clase para elegir a los peleadores
@@ -258,8 +262,9 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBatallaActionPerformed
 
     private void btnGetDigimonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetDigimonActionPerformed
- 
+ DigiWorld yggdrasill = new DigiWorld(model); 
         mihilo hilo= new mihilo();
+        hilo.inii(model);
         hilo.start();
         btnGetDigimon.setEnabled(false);
         
@@ -267,11 +272,14 @@ public class frmMain extends javax.swing.JFrame {
 
     
   
-    
+
     public class mihilo extends Thread{
-        DigiWorld  yggdrasill = new DigiWorld(model);
+    public void inii( DefaultTableModel x){
+            yggdrasill = new DigiWorld(x); 
+        }
+      
         @Override
-        
+      
         
         public void run() {
         try {
