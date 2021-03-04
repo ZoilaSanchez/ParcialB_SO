@@ -9,7 +9,7 @@ package clases;
  *
  * @author Miguel Matul <https://github.com/MigueMat4>
  */
-public class Digimon {
+ public class Digimon implements Comparable<Digimon> {
     private String name;
     private String img;
     private String level;
@@ -47,5 +47,10 @@ public class Digimon {
                 "nombre='" + name + '\'' +
                 ", nivel='" + level + '\'' +
                 '}';
+    }
+     public int compareTo(Digimon o) {
+        String a=String.valueOf(this.getName());
+        String b=String.valueOf(o.getName());
+        return a.compareTo(b);
     }
 }

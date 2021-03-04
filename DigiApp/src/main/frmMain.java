@@ -245,17 +245,35 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBatallaActionPerformed
 
     private void btnGetDigimonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetDigimonActionPerformed
-        yggdrasill = new DigiWorld(model);
+ 
+        mihilo hilo= new mihilo();
+        hilo.start();
+        btnGetDigimon.setEnabled(false);
+        
+    }//GEN-LAST:event_btnGetDigimonActionPerformed
+
+    
+  
+    
+    public class mihilo extends Thread{
+        DigiWorld  yggdrasill = new DigiWorld(model);
+        @Override
+        
+        
+        public void run() {
         try {
             yggdrasill.descargarDatos();
+            yggdrasill.ordenar();
+            Thread.sleep(10);
         } catch (IOException ex) {
             Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {
             Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
         }
-        btnGetDigimon.setEnabled(false);
-    }//GEN-LAST:event_btnGetDigimonActionPerformed
-
+        }
+    
+    }
+    
     private void btnElegirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElegirActionPerformed
         estadio = new RumbleArena(); // un nuevo estadio para cada clic en el botón de batalla
         estadio.elegirDigimon(); // código de la clase para elegir a los digimon que pelearán

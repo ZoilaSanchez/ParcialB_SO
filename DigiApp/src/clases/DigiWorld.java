@@ -10,11 +10,14 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import javax.swing.text.TableView;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
@@ -48,6 +51,7 @@ public final class DigiWorld {
         // ordenar listado de Digimon
         // <Inserte su código aquí>
         // agregar listado de Digimon a la tabla
+        Collections.sort(digimons);
         digimons.forEach((digimon) -> {
             tabla.addRow(new Object[]{digimon.getName(), digimon.getLevel()});
         });
@@ -57,4 +61,9 @@ public final class DigiWorld {
     public List<Digimon> getDigimons() {
         return digimons;
     }
+   
+          public void ordenar(){
+              
+          }
+    
 }
