@@ -49,18 +49,26 @@ public class frmMain extends javax.swing.JFrame {
             System.out.println("Eligiendo a los combatientes...");
             // código para elegir al primer peleador
             int digielecto1 = (int) ((Math.random() * ((yggdrasill.getDigimons().size() - 1) - 0)) + 0);
+            int digielecto2 = (int) ((Math.random() * ((yggdrasill.getDigimons().size() - 1) - 0)) + 0);
             peleador1 = yggdrasill.getDigimons().get(digielecto1);
+            peleador2 = yggdrasill.getDigimons().get(digielecto2);
             try {
                 URL url = new URL(peleador1.getImg());
                 Image img = ImageIO.read(url);
                 img = img.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH);
                 lblDigimon1.setIcon(new ImageIcon(img));
+                
+                URL url2 = new URL(peleador2.getImg());
+                Image img2 = ImageIO.read(url2);
+                img2 = img2.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH);
+                lblDigimon2.setIcon(new ImageIcon(img2));
             } catch (MalformedURLException ex) {
                 Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
             }
             lblDigimon1.setText(peleador1.getName());
+            lblDigimon2.setText(peleador2.getName());
             // código para elegir al segundo peleador
             // <Inserte su código aquí>
             System.out.println("¡Peladores listos para la batalla!");
@@ -242,6 +250,11 @@ public class frmMain extends javax.swing.JFrame {
         // Decisión de batalla
         // <Inserte su código aquí>
         System.out.println("¡Resultado de la batalla!");
+        if(nivel1 > nivel2){
+            JOptionPane.showMessageDialog(null,"Gano " + peleador1.getName());
+        }else{
+            JOptionPane.showMessageDialog(null,"Gano " + peleador2.getName());
+        }
     }//GEN-LAST:event_btnBatallaActionPerformed
 
     private void btnGetDigimonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetDigimonActionPerformed
