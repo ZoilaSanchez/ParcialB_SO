@@ -37,10 +37,14 @@ public class frmMain extends javax.swing.JFrame {
 
     public frmMain() {
         initComponents();
+        this.setLocationRelativeTo(this);
         tblDigimon.setModel(model); // diseña la tabla en base a las columnas definidas
-        btnBatalla.setEnabled(false); // no se puede batallar si no hay digimons peleadores
+        btnElegir.setEnabled(false); // no se puede batallar si no hay digimons peleadores
         reloj.start(); // objeto iniciado para la hora del sistema. ¡No modificar!}
-       
+       batallar.setEnabled(false);
+jScrollPane1.setOpaque(false);             
+jScrollPane1.getViewport().setOpaque(false);
+tblDigimon.setShowGrid(false);
 
              
     }
@@ -49,7 +53,7 @@ public class frmMain extends javax.swing.JFrame {
     public class RumbleArena {
         public void elegirDigimon() {
             btnElegir.setEnabled(false);
-            btnBatalla.setEnabled(false);
+            btnElegir.setEnabled(false);
             System.out.println("Eligiendo a los combatientes...");
             // código para elegir al primer peleador
             int digielecto1 = (int) ((Math.random() * ((yggdrasill.getDigimons().size() - 1) - 0)) + 0);
@@ -77,7 +81,7 @@ public class frmMain extends javax.swing.JFrame {
             // <Inserte su código aquí>
             System.out.println("¡Peladores listos para la batalla!");
             btnElegir.setEnabled(true);
-            btnBatalla.setEnabled(true);
+            batallar.setEnabled(true);
         }
     }
 
@@ -92,29 +96,32 @@ public class frmMain extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        btnGetDigimon = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDigimon = new javax.swing.JTable();
-        btnElegir = new javax.swing.JButton();
+        batallar = new javax.swing.JButton();
         lblDigimon1 = new javax.swing.JLabel();
         lblDigimon2 = new javax.swing.JLabel();
-        btnBatalla = new javax.swing.JButton();
         lblHH = new javax.swing.JLabel();
         lblMM = new javax.swing.JLabel();
         lblSS = new javax.swing.JLabel();
+        btnElegir = new javax.swing.JButton();
+        btnGetDigimon = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Digi App");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
 
-        btnGetDigimon.setText("Obtener digimon");
-        btnGetDigimon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGetDigimonActionPerformed(evt);
-            }
-        });
+        jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 580, 10));
 
+        tblDigimon.setBackground(new java.awt.Color(0, 0, 0));
+        tblDigimon.setForeground(new java.awt.Color(255, 255, 255));
         tblDigimon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -128,147 +135,72 @@ public class frmMain extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblDigimon);
 
-        btnElegir.setText("Elegir combatientes");
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 560, 114));
+
+        batallar.setBackground(new java.awt.Color(0, 0, 153));
+        batallar.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
+        batallar.setForeground(new java.awt.Color(255, 255, 255));
+        batallar.setText("Batallar");
+        batallar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 153), 3, true));
+        batallar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                batallarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(batallar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, 100, 40));
+
+        lblDigimon1.setForeground(new java.awt.Color(255, 255, 255));
+        lblDigimon1.setText("Digimon 1");
+        getContentPane().add(lblDigimon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, -1));
+
+        lblDigimon2.setForeground(new java.awt.Color(255, 255, 255));
+        lblDigimon2.setText("Digimon 2");
+        getContentPane().add(lblDigimon2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 310, -1, -1));
+
+        lblHH.setForeground(new java.awt.Color(255, 255, 255));
+        lblHH.setText("HH:");
+        getContentPane().add(lblHH, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, -1));
+
+        lblMM.setForeground(new java.awt.Color(255, 255, 255));
+        lblMM.setText("MM:");
+        getContentPane().add(lblMM, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, -1, -1));
+
+        lblSS.setForeground(new java.awt.Color(255, 255, 255));
+        lblSS.setText("SS");
+        getContentPane().add(lblSS, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, -1, -1));
+
+        btnElegir.setBackground(new java.awt.Color(0, 0, 153));
+        btnElegir.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
+        btnElegir.setForeground(new java.awt.Color(255, 255, 255));
+        btnElegir.setText("Elegir Combatientes");
+        btnElegir.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 153), 3, true));
         btnElegir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnElegirActionPerformed(evt);
             }
         });
+        getContentPane().add(btnElegir, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 190, 40));
 
-        lblDigimon1.setText("Digimon 1");
-
-        lblDigimon2.setText("Digimon 2");
-
-        btnBatalla.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnBatalla.setText("Batallar");
-        btnBatalla.addActionListener(new java.awt.event.ActionListener() {
+        btnGetDigimon.setBackground(new java.awt.Color(0, 0, 153));
+        btnGetDigimon.setFont(new java.awt.Font("Ebrima", 1, 18)); // NOI18N
+        btnGetDigimon.setForeground(new java.awt.Color(255, 255, 255));
+        btnGetDigimon.setText("Obtener Digimon");
+        btnGetDigimon.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 153), 3, true));
+        btnGetDigimon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBatallaActionPerformed(evt);
+                btnGetDigimonActionPerformed(evt);
             }
         });
+        getContentPane().add(btnGetDigimon, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 180, 40));
 
-        lblHH.setText("HH:");
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/1a8b6a638a6d578d0e1b6aa96fde1017.jpg"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 580, 490));
 
-        lblMM.setText("MM:");
-
-        lblSS.setText("SS");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(lblDigimon1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblDigimon2)
-                .addGap(70, 70, 70))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(120, 120, 120)
-                .addComponent(lblHH)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMM)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblSS)
-                .addGap(56, 56, 56))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(236, 236, 236)
-                        .addComponent(btnElegir))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(243, 243, 243)
-                        .addComponent(btnGetDigimon))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(244, 244, 244)
-                        .addComponent(btnBatalla, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lblHH)
-                    .addComponent(lblMM)
-                    .addComponent(lblSS))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnGetDigimon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnElegir)
-                .addGap(58, 58, 58)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDigimon1)
-                    .addComponent(lblDigimon2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
-                .addComponent(btnBatalla, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/maxresdefault.jpg"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 520));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnBatallaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatallaActionPerformed
-        // código para elegir un ganador en la batalla
-        int nivel1=1, nivel2=1; // variables que representarán los niveles de los digimon
-        System.out.println("Pelea en curso ...");
-        // Peleador 1
-        if (peleador1.getLevel().equals("Mega")) // nivel más alto
-            nivel1 = 7;
-        if (peleador1.getLevel().equals("Ultimate"))
-            nivel1 = 6;
-        if (peleador1.getLevel().equals("Champion"))
-            nivel1 = 5;
-        if (peleador1.getLevel().equals("Armor"))
-            nivel1 = 4;
-        if (peleador1.getLevel().equals("Rookie"))
-            nivel1 = 3;
-        if (peleador1.getLevel().equals("In Training"))
-            nivel1 = 2;
-        if (peleador1.getLevel().equals("Fresh")) // nivel más bajo
-            nivel1 = 1;
-        // Peleador 2
-        if (peleador2.getLevel().equals("Mega"))
-            nivel2 = 7;
-        if (peleador2.getLevel().equals("Ultimate"))
-            nivel2 = 6;
-        if (peleador2.getLevel().equals("Champion"))
-            nivel2 = 5;
-        if (peleador2.getLevel().equals("Armor"))
-            nivel2 = 4;
-        if (peleador2.getLevel().equals("Rookie"))
-            nivel2 = 3;
-        if (peleador2.getLevel().equals("In Training"))
-            nivel2 = 2;
-        if (peleador2.getLevel().equals("Fresh"))
-            nivel2 = 1;
-        // Decisión de batalla
-        // <Inserte su código aquí>
-        System.out.println("¡Resultado de la batalla!");
-        if(nivel1 > nivel2){
-            JOptionPane.showMessageDialog(null,"Gano " + peleador1.getName());
-        }else{
-            JOptionPane.showMessageDialog(null,"Gano " + peleador2.getName());
-        }
-    }//GEN-LAST:event_btnBatallaActionPerformed
-
-    private void btnGetDigimonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetDigimonActionPerformed
- DigiWorld yggdrasill = new DigiWorld(model); 
-        mihilo hilo= new mihilo();
-        hilo.inii(model);
-        hilo.start();
-        btnGetDigimon.setEnabled(false);
-        
-    }//GEN-LAST:event_btnGetDigimonActionPerformed
 
     
   
@@ -291,14 +223,68 @@ public class frmMain extends javax.swing.JFrame {
         } catch (InterruptedException ex) {
             Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
         }
+        btnElegir.setEnabled(true);
         }
+          
     
     }
     
+    private void btnGetDigimonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetDigimonActionPerformed
+       DigiWorld yggdrasill = new DigiWorld(model); 
+        mihilo hilo= new mihilo();
+        hilo.inii(model);
+        hilo.start();
+        btnGetDigimon.setEnabled(false);
+    }//GEN-LAST:event_btnGetDigimonActionPerformed
+
     private void btnElegirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElegirActionPerformed
         estadio = new RumbleArena(); // un nuevo estadio para cada clic en el botón de batalla
         estadio.elegirDigimon(); // código de la clase para elegir a los digimon que pelearán
     }//GEN-LAST:event_btnElegirActionPerformed
+
+    private void batallarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batallarActionPerformed
+       // código para elegir un ganador en la batalla
+        int nivel1=1, nivel2=1; // variables que representarán los niveles de los digimon
+        System.out.println("Pelea en curso ...");
+        // Peleador 1
+        if (peleador1.getLevel().equals("Mega")) // nivel más alto
+        nivel1 = 7;
+        if (peleador1.getLevel().equals("Ultimate"))
+        nivel1 = 6;
+        if (peleador1.getLevel().equals("Champion"))
+        nivel1 = 5;
+        if (peleador1.getLevel().equals("Armor"))
+        nivel1 = 4;
+        if (peleador1.getLevel().equals("Rookie"))
+        nivel1 = 3;
+        if (peleador1.getLevel().equals("In Training"))
+        nivel1 = 2;
+        if (peleador1.getLevel().equals("Fresh")) // nivel más bajo
+        nivel1 = 1;
+        // Peleador 2
+        if (peleador2.getLevel().equals("Mega"))
+        nivel2 = 7;
+        if (peleador2.getLevel().equals("Ultimate"))
+        nivel2 = 6;
+        if (peleador2.getLevel().equals("Champion"))
+        nivel2 = 5;
+        if (peleador2.getLevel().equals("Armor"))
+        nivel2 = 4;
+        if (peleador2.getLevel().equals("Rookie"))
+        nivel2 = 3;
+        if (peleador2.getLevel().equals("In Training"))
+        nivel2 = 2;
+        if (peleador2.getLevel().equals("Fresh"))
+        nivel2 = 1;
+        // Decisión de batalla
+        // <Inserte su código aquí>
+        System.out.println("¡Resultado de la batalla!");
+        if(nivel1 > nivel2){
+            JOptionPane.showMessageDialog(null,"Gano " + peleador1.getName());
+        }else{
+            JOptionPane.showMessageDialog(null,"Gano " + peleador2.getName());
+        }
+    }//GEN-LAST:event_batallarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -366,10 +352,12 @@ public class frmMain extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBatalla;
+    private javax.swing.JButton batallar;
     private javax.swing.JButton btnElegir;
     private javax.swing.JButton btnGetDigimon;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblDigimon1;
