@@ -264,7 +264,7 @@ public class frmMain extends javax.swing.JFrame {
         try {
             yggdrasill.descargarDatos();
             yggdrasill.ordenar();
-            Thread.sleep(10);
+            Thread.sleep(100);
         } catch (IOException ex) {
             Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {
